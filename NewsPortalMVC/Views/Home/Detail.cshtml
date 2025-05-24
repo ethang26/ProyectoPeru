@@ -1,0 +1,20 @@
+<h2>@Model.Post.Title</h2>
+<p>@Model.Post.Body</p>
+<p><strong>Autor:</strong> @Model.Author.Name (@Model.Author.Email)</p>
+
+<h4>Comentarios:</h4>
+@foreach (var comment in Model.Comments)
+{
+    <div><strong>@comment.Name</strong>: @comment.Body</div>
+}
+
+<form asp-action="SendFeedback" method="post">
+    <input type="hidden" name="postId" value="@Model.Post.Id" />
+    <button name="sentimiento" value="like">👍 Me gustó</button>
+    <button name="sentimiento" value="dislike">👎 No me gustó</button>
+</form>
+
+@if (TempData["msg"] != null)
+{
+    <p>@TempData["msg"]</p>
+}
